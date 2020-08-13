@@ -1,10 +1,10 @@
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { NestFactory } from '@nestjs/core';
 
-import { AppModule } from 'src/app.module';
-import { Bootstrapper } from 'src/bootstraps/Bootstrapper';
+import { AppModule } from '../app.module';
+import { Bootstrapper } from '../bootstraps/Bootstrapper';
 
-import Log from 'src/bootstraps/Log';
+import Log from '../bootstraps/Log';
 import { Locals } from './Locals';
 
 export class Express {

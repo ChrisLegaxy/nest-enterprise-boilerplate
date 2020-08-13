@@ -16,7 +16,7 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 
 import Log from './Log';
-import { allowedOrigins } from 'cors.origin';
+import { allowedOrigins } from '../cors.origin';
 
 export class Security {
   public static async mount(

@@ -11,3 +11,10 @@ services:
       POSTGRES_DB: sastra
     ports:
       - "5432:5432"
+
+  sastra:
+    build: ./
+    depends_on:
+      - db
+    ports:
+      - "7000:7000"

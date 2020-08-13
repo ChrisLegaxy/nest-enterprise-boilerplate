@@ -2941,6 +2941,11 @@
         "signature": "b82491e2990291580288c5602d4c017238977749d52b17391f0e45d9a29be644",
         "affectsGlobalScope": false
       },
+      "./src/cors.origin.ts": {
+        "version": "20de4ce767754157db370b3b6c0646ca59a7bd4d4dfcac42cc93f88920dae5d8",
+        "signature": "486645bdc666c0f4ba698c85fa304d2589e1035839c61d64aabcd420a3a40730",
+        "affectsGlobalScope": false
+      },
       "./node_modules/@nestjs/core/adapters/http-adapter.d.ts": {
         "version": "748dc5e30576ac07af1121893bb1beaafb0d7d0000142b69fae2b2995fc7f7f4",
         "signature": "748dc5e30576ac07af1121893bb1beaafb0d7d0000142b69fae2b2995fc7f7f4",
@@ -3291,13 +3296,8 @@
         "signature": "767f7ca771359241740ebd017b4aa28cd5eb8da1bd933e1d1c303cd09ba3ddeb",
         "affectsGlobalScope": true
       },
-      "./cors.origin.ts": {
-        "version": "648b7ff8ad2f2356b24f97274124bde6813d674d28e0eebf4ba5efa8ccdb8d1f",
-        "signature": "cb8e26259f9edbb20804e826fa52c28cc0cb09228812217a506317e9e809bea9",
-        "affectsGlobalScope": false
-      },
       "./src/bootstraps/Security.ts": {
-        "version": "691d8a3c324c8bbc38ff347132eb73e26cb1705fd401a9770d9efb749115f4ba",
+        "version": "ffb42ad53b6ffdc0d397894cf68affebd66299661cf28c66e36306b43e0d594f",
         "signature": "d4c6198734a001877420f0b95b78a8f2664aa001d681cf18a1ece9a6a521f685",
         "affectsGlobalScope": false
       },
@@ -3307,12 +3307,12 @@
         "affectsGlobalScope": false
       },
       "./src/loaders/Locals.ts": {
-        "version": "aabdac0f60b450a825efc5e722366532aab2a850f593464b670159a93d93fcf1",
+        "version": "d92d3afd374eb2709b3530ee015ffdae4ba54285b47f26a4c7ec575935ef4e4d",
         "signature": "24a542e1d206013d3d0d6b2a1a6ad71e729a58792eb00f045049239c7be25f5f",
         "affectsGlobalScope": false
       },
       "./src/loaders/Express.ts": {
-        "version": "b5045680db4ef8189043c0a106c87866bd5e77848e38f35bfbf396ea7b11f03a",
+        "version": "750fc5ac9f1e14e4acc53ff0540e6ab69b9f75cb57104977deb6a370f02be704",
         "signature": "924959187d0afbe361b6cdc6fd293427a87343b93b5860eaefb1bdb8cd7b9cfb",
         "affectsGlobalScope": false
       },
@@ -3634,13 +3634,6 @@
       "configFilePath": "./tsconfig.build.json"
     },
     "referencedMap": {
-      "./cors.origin.ts": [
-        "./node_modules/@types/graceful-fs/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts",
-        "./node_modules/@types/node/util.d.ts"
-      ],
       "./node_modules/@babel/parser/typings/babel-parser.d.ts": [
         "./node_modules/@babel/types/lib/index.d.ts",
         "./node_modules/@types/graceful-fs/index.d.ts",
@@ -10018,7 +10011,6 @@
         "./node_modules/@types/node/util.d.ts"
       ],
       "./src/bootstraps/Security.ts": [
-        "./cors.origin.ts",
         "./node_modules/@nestjs/platform-express/index.d.ts",
         "./node_modules/@types/express-rate-limit/index.d.ts",
         "./node_modules/@types/graceful-fs/index.d.ts",
@@ -10027,7 +10019,8 @@
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/helmet/dist/index.d.ts",
-        "./src/bootstraps/Log.ts"
+        "./src/bootstraps/Log.ts",
+        "./src/cors.origin.ts"
       ],
       "./src/common/constants/Role.ts": [
         "./node_modules/@types/graceful-fs/index.d.ts",
@@ -10054,6 +10047,13 @@
       ],
       "./src/config/database.config.ts": [
         "./node_modules/@nestjs/config/index.d.ts",
+        "./node_modules/@types/graceful-fs/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./src/cors.origin.ts": [
         "./node_modules/@types/graceful-fs/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -16589,7 +16589,6 @@
       ]
     },
     "semanticDiagnosticsPerFile": [
-      "./cors.origin.ts",
       "./node_modules/@babel/parser/typings/babel-parser.d.ts",
       "./node_modules/@babel/types/lib/index.d.ts",
       "./node_modules/@nestjs/common/cache/cache.constants.d.ts",
@@ -17284,6 +17283,7 @@
       "./src/config/app.config.ts",
       "./src/config/auth.config.ts",
       "./src/config/database.config.ts",
+      "./src/cors.origin.ts",
       "./src/helpers/envValidator.ts",
       "./src/loaders/App.ts",
       "./src/loaders/Express.ts",

@@ -1,6 +1,6 @@
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { ConfigService } from '@nestjs/config';
-import Log from 'src/bootstraps/Log';
+import Log from '../bootstraps/Log';
 
 export class Locals {
   private static configService: ConfigService;
