@@ -1,8 +1,8 @@
 /**
- * @file Log Middleware
+ * @file Http Middleware
  *
  * @description
- *    Create and maintain logs
+ *    Nest Express's Http Bootstrap Middleware
  *
  * @author       Chris Van <chrisvan.vshmr@gmail.com> | <chris.legaxy@gmail.com>
  * @copyright    CPC

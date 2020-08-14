@@ -1,8 +1,8 @@
 /**
- * @file Log Middleware
+ * @file Bootstrapper
  *
  * @description
- *    Create and maintain logs
+ *    For mounting all the middleware bootstraps
  *
  * @author       Chris Van <chrisvan.vshmr@gmail.com> | <chris.legaxy@gmail.com>
  * @copyright    CPC

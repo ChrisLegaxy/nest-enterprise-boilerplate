@@ -29,7 +29,7 @@ export class Express {
 
     await Log.info(
       `Server :: Running @ ${
-        Locals.config().app.secured ? 'https' : 'http'
+        Locals.config().app.secured === "true" ? 'https' : 'http'
       }://${Locals.config().app.host}:${Locals.config().app.port}`
     );
   }

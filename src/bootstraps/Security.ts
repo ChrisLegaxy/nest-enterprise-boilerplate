@@ -1,8 +1,8 @@
 /**
- * @file Log Middleware
+ * @file Security Middleware
  *
  * @description
- *    Create and maintain logs
+ *    Nest Express's Security Bootstrap Middlewares
  *
  * @author       Chris Van <chrisvan.vshmr@gmail.com> | <chris.legaxy@gmail.com>
  * @copyright    CPC
