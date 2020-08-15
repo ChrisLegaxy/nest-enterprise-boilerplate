@@ -1,3 +1,15 @@
+/**
+ * @file nodeEnvValidator
+ *
+ * @description
+ *    Check if NODE_ENV is valid
+ *
+ * @author       Chris Van <chrisvan.vshmr@gmail.com> | <chris.legaxy@gmail.com>
+ * @copyright    CPC
+ * @since        1.0.0
+ * @version      1.0.0
+ */
+
 import { exit } from 'process';
 
 const envs = ['development', 'production', 'test', 'provision'];

@@ -10,7 +10,7 @@ import authConfig from './config/auth.config';
 import databaseConfig from './config/database.config';
 
 import { DatabaseService } from './services/database.service';
-import { envValidator } from './helpers/envValidator';
+import { envValidator } from './helpers/nodeEnvValidator';
 
 envValidator(process.env.NODE_ENV);
 
@@ -19,16 +19,16 @@ envValidator(process.env.NODE_ENV);
     ConfigModule.forRoot({
       envFilePath: [
         `.env.development.local`,
-        `.env.${process.env.NODE_ENV || 'development'}`,
+        `.env.${process.env.NODE_ENV || 'development'}`
       ],
-      load: [appConfig, authConfig, databaseConfig],
+      load: [appConfig, authConfig, databaseConfig]
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useClass: DatabaseService,
+      useClass: DatabaseService
     }),
     UserModule,
-    AuthModule,
-  ],
+    AuthModule
+  ]
 })
 export class AppModule {}

@@ -11,13 +11,13 @@
  */
 
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { Logger } from '@nestjs/common';
 
 import morgan from 'morgan';
 import compression from 'compression';
 import * as rfs from 'rotating-file-stream';
 
 import Log from './Log';
-
 import path from 'path';
 
 export class Http {
@@ -42,6 +42,8 @@ export class Http {
     );
 
     await Log.info('HTTP Middleware :: Booted Succesfully');
+
+    await Logger.log('HTTP Middleware succesfully booted', 'BootstrapLoader');
 
     return await _express;
   }

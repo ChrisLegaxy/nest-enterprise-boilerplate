@@ -1,13 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException, HttpStatus } from '@nestjs/common';
 
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
+import { Http } from 'src/bootstraps/Http';
 
 @Injectable()
 export class UserService {
-  constructor(
-    private userRepository: UserRepository
-  ) {}
+  constructor(private userRepository: UserRepository) {}
 
   public async find(): Promise<User[]> {
     return await this.userRepository.find();
@@ -17,12 +16,12 @@ export class UserService {
     return await this.userRepository.findByIds(ids);
   }
 
-  public async findOne(id: number): Promise<User | undefined> {
-    return await this.userRepository.findOne(id);
-  }
-
   public async findOneOrFail(id: number): Promise<User> {
-    return await this.userRepository.findOneOrFail(id);
+    try {
+      return await this.userRepository.findOneOrFail(id);
+    } catch (error) {
+      throw new NotFoundException(error);
+    }
   }
 
   public async create(user: User): Promise<User> {

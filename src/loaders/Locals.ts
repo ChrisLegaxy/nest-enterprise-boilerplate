@@ -1,5 +1,18 @@
+/**
+ * @file Locals
+ *
+ * @description
+ *    Contains the configurations
+ *
+ * @author       Chris Van <chrisvan.vshmr@gmail.com> | <chris.legaxy@gmail.com>
+ * @copyright    CPC
+ * @since        1.0.0
+ * @version      1.0.0
+ */
+
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { ConfigService } from '@nestjs/config';
+import { Logger } from '@nestjs/common';
 import Log from '../bootstraps/Log';
 
 export class Locals {
@@ -11,6 +24,8 @@ export class Locals {
     this.configService = await _express.get(ConfigService);
 
     await Log.info('Configurations :: Loaded Successfully');
+
+    await Logger.log('Configurations successfully loaded', 'ConfigurationLoader');
 
     return await _express;
   }

@@ -11,6 +11,7 @@
  */
 
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { Logger } from '@nestjs/common';
 
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
@@ -38,6 +39,8 @@ export class Security {
     );
 
     await Log.info('HTTP Security :: Booted Succesfully');
+
+    await Logger.log('HTTP Security successfully booted', 'BootstrapLoader');
 
     return await _express;
   }

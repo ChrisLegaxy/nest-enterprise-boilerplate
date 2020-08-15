@@ -5,11 +5,18 @@ import {
   Post,
   HttpStatus,
   Param,
-  NotFoundException
+  NotFoundException,
+  Body,
+  ParseIntPipe,
+  HttpCode,
+  UsePipes,
+  ValidationPipe
 } from '@nestjs/common';
 import { Response } from 'express';
 import { UserService } from './user.service';
 import { User } from './user.entity';
+import { UserDto } from './dto/UserDto';
+import { Http } from 'src/bootstraps/Http';
 
 @Controller('users')
 export class UserController {
@@ -21,24 +28,24 @@ export class UserController {
   }
 
   @Get(':id')
-  public async getById(@Param('id') id: number, @Res() response: Response): Promise<any> {
-    try {
-      return await response.json(await this.userService.findOneOrFail(id));
-    } catch (error) {
-      throw new NotFoundException({
-        ...error,
-        status: HttpStatus.NOT_FOUND
-      });
-    }
+  public async getById(
+    @Param('id', ParseIntPipe) id: number,
+    @Res() response: Response
+  ): Promise<any> {
+    return await response.json(await this.userService.findOneOrFail(id));
   }
 
   @Post()
-  public async create(@Res() response: Response): Promise<any> {
+  @HttpCode(HttpStatus.CREATED)
+  // @UsePipes(new ValidationPipe({ }))
+  public async create(
+    @Body() body: UserDto,
+    @Res() response: Response
+  ): Promise<any> {
     const user = new User();
 
-    user.firstName = 'Wow';
-    user.lastName = 'OMG';
-    user.isActive = true;
+    user.email = body.email;
+    user.password = body.password;
 
     await this.userService.create(user);
 

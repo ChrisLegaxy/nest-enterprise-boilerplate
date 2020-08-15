@@ -11,9 +11,11 @@
  */
 
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { Logger } from '@nestjs/common';
+
 import { Http } from './Http';
-import Log from './Log';
 import { Security } from './Security';
+import Log from './Log';
 
 export class Bootstrapper {
   public static async init(
@@ -28,6 +30,8 @@ export class Bootstrapper {
     _express = await Security.mount(_express);
 
     await Log.info('Boostrapper :: Mounted Successfully');
+
+    await Logger.log('Boostrapper succesfully mounted', 'BootstrapLoader');
 
     return await _express;
   }
