@@ -14,7 +14,7 @@ import { exit } from 'process';
 
 const envs = ['development', 'production', 'test', 'provision'];
 
-export const envValidator = (nodeEnv: string): void => {
+export const nodeEnvValidator = (nodeEnv: string): void => {
   if (nodeEnv && !envs.includes(nodeEnv)) {
     console.log(
       '\x1b[31m%s\x1b[0m',

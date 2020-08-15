@@ -10,9 +10,9 @@ import authConfig from './config/auth.config';
 import databaseConfig from './config/database.config';
 
 import { DatabaseService } from './services/database.service';
-import { envValidator } from './helpers/nodeEnvValidator';
+import { nodeEnvValidator } from './helpers/nodeEnvValidator';
 
-envValidator(process.env.NODE_ENV);
+nodeEnvValidator(process.env.NODE_ENV);
 
 @Module({
   imports: [
