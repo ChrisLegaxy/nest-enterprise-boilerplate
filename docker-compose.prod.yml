@@ -12,7 +12,7 @@ services:
     ports:
       - "5432:5432"
 
-  sastra:
+  app:
     build: ./
     depends_on:
       - db
