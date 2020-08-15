@@ -23,7 +23,7 @@ export class Bootstrapper {
   ): Promise<NestExpressApplication> {
     await Log.info('Bootstrapper :: Mounting');
 
-    await _express.setGlobalPrefix('v1');
+    await _express.setGlobalPrefix('api');
 
     _express = await Http.mount(_express);
 

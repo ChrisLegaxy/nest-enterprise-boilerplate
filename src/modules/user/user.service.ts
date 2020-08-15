@@ -1,8 +1,13 @@
-import { Injectable, NotFoundException, HttpStatus } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  NotAcceptableException
+} from '@nestjs/common';
 
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
-import { Http } from 'src/bootstraps/Http';
+import { UserRegisterDto } from '../auth/dto/UserRegisterDto';
+import { UpdateUserBody } from './dto/UserDto';
 
 @Injectable()
 export class UserService {
@@ -12,7 +17,7 @@ export class UserService {
     return await this.userRepository.find();
   }
 
-  public async findByIds(ids: Array<number>): Promise<Array<User>> {
+  public async findByIds(ids: number[]): Promise<User[]> {
     return await this.userRepository.findByIds(ids);
   }
 
@@ -24,18 +29,29 @@ export class UserService {
     }
   }
 
-  public async create(user: User): Promise<User> {
-    const newUser = await this.userRepository.save(user);
-    return newUser;
+  public async create(userRegisterDto: UserRegisterDto): Promise<User> {
+    try {
+      const user = this.userRepository.create(userRegisterDto);
+
+      return await this.userRepository.save(user);
+    } catch (error) {
+      throw new NotAcceptableException(error);
+    }
   }
 
-  public async update(id: number, user: User): Promise<User> {
-    user.id = id;
-    return await this.userRepository.save(user);
+  public async update(
+    id: number,
+    updateUserBody: UpdateUserBody
+  ): Promise<User> {
+    const user = await this.findOneOrFail(id);
+
+    return await this.userRepository.save({
+      ...user,
+      ...updateUserBody
+    });
   }
 
   public async delete(id: number): Promise<void> {
     await this.userRepository.delete(id);
-    return;
   }
 }
