@@ -2,7 +2,7 @@ import {
   Injectable,
   NotFoundException,
   NotAcceptableException,
-  ServiceUnavailableException,
+  ServiceUnavailableException
 } from '@nestjs/common';
 
 import { UserRepository } from './user.repository';
@@ -18,7 +18,7 @@ export class UserService {
   constructor(private userRepository: UserRepository) {}
 
   public async findAllUsers(
-    pageOptionsDto: UsersPageOptionsDto,
+    pageOptionsDto: UsersPageOptionsDto
   ): Promise<UsersPageDto> {
     const queryBuilder = this.userRepository.createQueryBuilder('user');
 
@@ -29,7 +29,7 @@ export class UserService {
 
     const pageMetaDto = new PageMetaDto({
       pageOptionsDto,
-      itemCount: usersCount,
+      itemCount: usersCount
     });
 
     return new UsersPageDto(plainToClass(UserResponseDto, users), pageMetaDto);
@@ -52,7 +52,7 @@ export class UserService {
   }
 
   public async create(
-    userRegisterDto: UserRegisterDto,
+    userRegisterDto: UserRegisterDto
   ): Promise<UserResponseDto> {
     try {
       const user = this.userRepository.create(userRegisterDto);
@@ -67,13 +67,13 @@ export class UserService {
 
   public async update(
     id: number,
-    updateUserBody: UpdateUserBodyDto,
+    updateUserBody: UpdateUserBodyDto
   ): Promise<UserResponseDto> {
     const user = await this.findOneOrFail(id);
 
     const updatedUser = await this.userRepository.save({
       ...user,
-      ...updateUserBody,
+      ...updateUserBody
     });
 
     return plainToClass(UserResponseDto, updatedUser);

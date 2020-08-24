@@ -10,7 +10,7 @@ import {
   Put,
   Body,
   Query,
-  ValidationPipe,
+  ValidationPipe
 } from '@nestjs/common';
 import { Response, response } from 'express';
 import { UserService } from './user.service';
@@ -27,10 +27,10 @@ export class UserController {
   public async get(
     @Query(new ValidationPipe({ transform: true }))
     pageOptionsDto: UsersPageOptionsDto,
-    @Res() response: Response,
+    @Res() response: Response
   ): Promise<any> {
     const users: UsersPageDto = await this.userService.findAllUsers(
-      pageOptionsDto,
+      pageOptionsDto
     );
 
     return response.json(users);
@@ -40,7 +40,7 @@ export class UserController {
   @Get(':id')
   public async getById(
     @Param('id', ParseIntPipe) id: number,
-    @Res() response: Response,
+    @Res() response: Response
   ): Promise<any> {
     return response.json(await this.userService.findOneOrFail(id));
   }
@@ -50,7 +50,7 @@ export class UserController {
   public async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() body: UpdateUserBodyDto,
-    @Res() response: Response,
+    @Res() response: Response
   ): Promise<any> {
     return response.json(await this.userService.update(id, body));
   }

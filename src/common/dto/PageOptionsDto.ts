@@ -6,7 +6,7 @@ import {
   IsOptional,
   IsString,
   Max,
-  Min,
+  Min
 } from 'class-validator';
 
 import { Order } from '../constants/Params';
