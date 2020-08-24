@@ -1,16 +1,18 @@
 import { IsEmail, IsNotEmpty, IsString, IsOptional } from 'class-validator';
+import { Exclude } from 'class-transformer';
 
-export class UserDto {
+export class UserResponseDto {
   @IsNotEmpty()
   @IsEmail()
   email: string;
 
   @IsNotEmpty()
   @IsString()
+  @Exclude()
   password: string;
 }
 
-export class UpdateUserBody {
+export class UpdateUserBodyDto {
   @IsOptional()
   @IsNotEmpty()
   @IsEmail()

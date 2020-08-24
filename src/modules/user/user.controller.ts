@@ -8,11 +8,15 @@ import {
   HttpCode,
   HttpStatus,
   Put,
-  Body
+  Body,
+  Query,
+  ValidationPipe,
 } from '@nestjs/common';
-import { Response } from 'express';
+import { Response, response } from 'express';
 import { UserService } from './user.service';
-import { UpdateUserBody } from './dto/UserDto';
+import { UpdateUserBodyDto } from './dto/UserDto';
+import { UsersPageOptionsDto } from './dto/UsersPageOptionsDto';
+import { UsersPageDto } from './dto/UsersPageDto';
 
 @Controller('users')
 export class UserController {
@@ -20,15 +24,23 @@ export class UserController {
 
   @HttpCode(HttpStatus.OK)
   @Get()
-  public async get(@Res() response: Response): Promise<any> {
-    return response.json(await this.userService.find());
+  public async get(
+    @Query(new ValidationPipe({ transform: true }))
+    pageOptionsDto: UsersPageOptionsDto,
+    @Res() response: Response,
+  ): Promise<any> {
+    const users: UsersPageDto = await this.userService.findAllUsers(
+      pageOptionsDto,
+    );
+
+    return response.json(users);
   }
 
   @HttpCode(HttpStatus.OK)
   @Get(':id')
   public async getById(
     @Param('id', ParseIntPipe) id: number,
-    @Res() response: Response
+    @Res() response: Response,
   ): Promise<any> {
     return response.json(await this.userService.findOneOrFail(id));
   }
@@ -37,15 +49,15 @@ export class UserController {
   @HttpCode(HttpStatus.OK)
   public async update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() body: UpdateUserBody,
-    @Res() response: Response
+    @Body() body: UpdateUserBodyDto,
+    @Res() response: Response,
   ): Promise<any> {
     return response.json(await this.userService.update(id, body));
   }
 
   @HttpCode(HttpStatus.NO_CONTENT)
-  @Delete()
-  public async delete(@Param('id', ParseIntPipe) id: number): Promise<void> {
-    await this.userService.delete(id);
+  @Delete('/:id')
+  public async delete(@Param('id', ParseIntPipe) id: number): Promise<any> {
+    return await this.userService.delete(id);
   }
 }
