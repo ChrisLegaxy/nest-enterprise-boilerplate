@@ -6,12 +6,13 @@ import {
 } from '@nestjs/common';
 
 import { UserRepository } from './user.repository';
-import { UserRegisterDto } from '../auth/dto/UserRegisterDto';
+import { RegisterBodyDto } from '../auth/dto/AuthDto';
 import { UpdateUserBodyDto, UserResponseDto } from './dto/UserDto';
 import { UsersPageDto } from './dto/UsersPageDto';
 import { PageMetaDto } from 'src/common/dto/PageMetaDto';
 import { UsersPageOptionsDto } from './dto/UsersPageOptionsDto';
 import { plainToClass } from 'class-transformer';
+import { User } from './user.entity';
 
 @Injectable()
 export class UserService {
@@ -38,7 +39,7 @@ export class UserService {
   public async findByIds(ids: number[]): Promise<UserResponseDto[]> {
     const users = await this.userRepository.findByIds(ids);
 
-    return plainToClass(UserRegisterDto, users);
+    return plainToClass(UserResponseDto, users);
   }
 
   public async findOneOrFail(id: number): Promise<UserResponseDto> {
@@ -51,11 +52,19 @@ export class UserService {
     }
   }
 
-  public async create(
-    userRegisterDto: UserRegisterDto
+  public async findByEmail(email: string): Promise<User> {
+    const user = await this.userRepository.findByEmail(email);
+
+    if (!user) { throw new NotFoundException('User not found'); }
+
+    return user;
+  }
+
+  public async register(
+    registerBodyDto: RegisterBodyDto
   ): Promise<UserResponseDto> {
     try {
-      const user = this.userRepository.create(userRegisterDto);
+      const user = this.userRepository.create(registerBodyDto);
 
       await this.userRepository.save(user);
 

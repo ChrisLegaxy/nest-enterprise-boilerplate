@@ -5,12 +5,16 @@ import {
   HttpCode,
   HttpStatus,
   Res,
-  Body
+  Body,
+  UseGuards,
+  Req
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { Response } from 'express';
-import { UserRegisterDto } from './dto/UserRegisterDto';
+import { Response, Request } from 'express';
+import { RegisterBodyDto } from './dto/AuthDto';
 import { UserService } from '../user/user.service';
+import { LocalAuthGuard } from 'src/guards/local-auth.guard';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -19,17 +23,25 @@ export class AuthController {
     private userService: UserService
   ) {}
 
+  @UseGuards(LocalAuthGuard)
   @Post('login')
-  public async login() {
-    return await this.authService.validate();
+  @HttpCode(HttpStatus.OK)
+  public async login(@Req() request: Request) {
+    return this.authService.generateJwt(request.user);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('current')
+  public async getProfile(@Req() request: Request) {
+    return request.user;
   }
 
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
   public async register(
-    @Body() body: UserRegisterDto,
+    @Body() body: RegisterBodyDto,
     @Res() response: Response
   ): Promise<any> {
-    return response.json(await this.userService.create(body));
+    return response.json(await this.userService.register(body));
   }
 }

@@ -1,7 +1,25 @@
-export class LoginBody {}
+import { IsNotEmpty, IsEmail, IsString } from 'class-validator';
 
-export class RegisterBody {}
+export class LoginBodyDto {
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
 
-export class RegisterResponse {}
+  @IsNotEmpty()
+  @IsString()
+  password: string;
+}
 
-export class LoginResponse {}
+export class RegisterBodyDto {
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
+
+  @IsNotEmpty()
+  @IsString()
+  password: string;
+}
+
+export class RegisterResponseDto {}
+
+export class LoginResponseDto {}

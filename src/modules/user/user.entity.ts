@@ -34,13 +34,18 @@ export class User extends Abstract {
     });
   }
 
-  public static async comparePassword(password: string, user: User) {
+  public static async comparePassword(
+    password: string,
+    user: User
+  ): Promise<boolean> {
     try {
       const match = await bcrypt.compare(password, user.password);
 
       if (!match) {
         throw new UnauthorizedException('Incorrect Email or Password');
       }
+
+      return match;
     } catch (error) {
       throw error;
     }
